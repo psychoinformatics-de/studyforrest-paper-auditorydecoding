@@ -10,18 +10,18 @@ Then run the following command will produce the results of the MVPA in the outpu
 
 python mvpa_eval_spatial_preproc.py \
             -o out \
-            --result-label sub001 lp 5\
-            --bold-images /home/data/psyinf/forrest_gump/openfmri.org/sub001/BOLD/task002_run0*/bold_dico_bold7Tp1_to_subjbold7Tp1.nii.gz \
-            --mask /home/data/exppsy/spark/Study_Forrest/analysis/masks/sub001/task002/Grey_Auditory_cortex.nii.gz \
+            --result-label <subject-ID> <filter-type> <FWHM>\
+            --bold-images <dataset_folder>/<subject-ID>/BOLD/task002_run0*/bold_dico_bold7Tp1_to_subjbold7Tp1.nii.gz \
+            --mask <subject specific mask image> \
             -m polynomial_order 2 \
-            -m behav_file /home/data/psyinf/forrest_gump/openfmri.org/sub001/behav/task002_run0*/behavdata.txt \
-            -m motion_file /home/data/psyinf/forrest_gump/openfmri.org/sub001/BOLD/task002_run0*/bold_dico_moco.txt \
+            -m behav_file <dataset_folder>/<subject-ID>/behav/task002_run0*/behavdata.txt \
+            -m motion_file <dataset_folder>/<subject-ID>/BOLD/task002_run0*/bold_dico_moco.txt \
             -m run_number 1 2 3 4 5 6 7 8 \
             --fwhm 5 \
             --filter-type lp \
-            --mkds code-spatial_preproc/MVPA/task002/create_evds.py \
-            --clf code-spatial_preproc/MVPA/task002/clf.py \
-            --tune-hyperparam code-spatial_preproc/MVPA/task002/tune_test_values.py
+            --mkds MVPA/task002/create_evds.py \
+            --clf MVPA/task002/clf.py \
+            --tune-hyperparam MVPA/task002/tune_test_values.py
 
 
 ### All the following commands need to be run from '/home/data/exppsy/spark/Study_Forrest/analysis' location
