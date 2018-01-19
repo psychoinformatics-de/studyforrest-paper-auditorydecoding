@@ -36,9 +36,14 @@ old_filter_dict = {'hp':'HPF', \
               'lp':'LPF'}
 
 
-filter_types=['lp', 'hp', 'bp', 'bs']
-subject_list=['sub001', 'sub002', 'sub003', 'sub004', 'sub005', 'sub006', 'sub007', 'sub008', 'sub009', 'sub010', 'sub011', 'sub012', 'sub013', 'sub014', 'sub015', 'sub016', 'sub017', 'sub018', 'sub019']
-#subject_list=['sub001']
+subject_list=sys.argv[1].split(', ')
+filter_types=sys.argv[2].split(', ')
+MVPA_result_folder=sys.argv[3]
+mask_name=sys.argv[4]
+
+#filter_types=['lp', 'hp', 'bp', 'bs']
+#subject_list=['sub001', 'sub002', 'sub003', 'sub004', 'sub005', 'sub006', 'sub007', 'sub008', 'sub009', 'sub010', 'sub011', 'sub012', 'sub013', 'sub014', 'sub015', 'sub016', 'sub017', 'sub018', 'sub019']
+
 
 for req_filter in filter_types:
     mean_list=[]
@@ -46,14 +51,14 @@ for req_filter in filter_types:
     for fwhm in range(21):
         subject_accuracy=[]
         for subject in subject_list:
-            data=h5load('MVPA_results_copy/'+subject+'_Grey_Auditory_cortex_'+req_filter+'_'+str(fwhm)+'.hdf5')
+            data=h5load(MVPA_result_folder+'/'+subject+'_'+mask_name+'_'+req_filter+'_'+str(fwhm)+'.hdf5')
             subject_accuracy.append(float(data.a['confusion'].value.percent_correct))
             ### check data from old dataset
-            old_data=h5load('/home/data/exppsy/Field_Strength_Comparison/analysis/MVPA_auditory/Grey_Auditory_cortex_results/'+subject+'/results/task002/gauss/'+old_filter_dict[req_filter]+'/'+str(fwhm)+'/accuracy.hdf5')
-            if not (float(data.a['confusion'].value.percent_correct)==np.mean(old_data)):
-                print subject
-                print req_filter
-                print fwhm
+#            old_data=h5load('/home/data/exppsy/Field_Strength_Comparison/analysis/MVPA_auditory/Grey_Auditory_cortex_results/'+subject+'/results/task002/gauss/'+old_filter_dict[req_filter]+'/'+str(fwhm)+'/accuracy.hdf5')
+#            if not (float(data.a['confusion'].value.percent_correct)==np.mean(old_data)):
+#                print subject
+#                print req_filter
+#                print fwhm
             
         mean_list.append(np.mean(subject_accuracy))
         ste_list.append(stats.sem(subject_accuracy))
@@ -68,7 +73,7 @@ plt.yticks(np.arange(25,87,10), np.arange(25,87,10), fontsize=8)
 plt.axhline(y=20, color='black', linestyle='dashed', linewidth=1)
 
 plt.tight_layout()
-graph_plots_folder=os.path.abspath(os.path.join('MVPA_results_copy', 'plot_folder'))
+graph_plots_folder=os.path.abspath(os.path.join(MVPA_result_folder, 'plot_folder'))
 if not os.path.exists(graph_plots_folder):
     os.makedirs(graph_plots_folder)
 
