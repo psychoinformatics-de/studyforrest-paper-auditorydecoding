@@ -9,19 +9,28 @@ Then run the following command will produce the results of the MVPA in the outpu
 
 
 python mvpa_eval_spatial_preproc.py \
-            -o out \
-            --result-label <subject-ID> <filter-type> <FWHM>\
+            -o <output folder> \
+            --result-label <subject-ID> <filter type> <FWHM>\
             --bold-images <dataset_folder>/<subject-ID>/BOLD/task002_run0*/bold_dico_bold7Tp1_to_subjbold7Tp1.nii.gz \
             --mask <subject specific mask image> \
             -m polynomial_order 2 \
             -m behav_file <dataset_folder>/<subject-ID>/behav/task002_run0*/behavdata.txt \
             -m motion_file <dataset_folder>/<subject-ID>/BOLD/task002_run0*/bold_dico_moco.txt \
             -m run_number 1 2 3 4 5 6 7 8 \
-            --fwhm 5 \
-            --filter-type lp \
+            --fwhm <FWHM> \
+            --filter-type <filter type> \
             --mkds MVPA/task002/create_evds.py \
             --clf MVPA/task002/clf.py \
             --tune-hyperparam MVPA/task002/tune_test_values.py
+
+
+
+    <output folder>: where you want to save the output of the MVPA
+    <subject-ID>: subject ID of the particular participant eg: sub001
+    <filter type>: EIther of 'lp, hp, bp, bs' standing for low-pass, high-pass, band-pass, band-stop filters              
+    <FWHM>: Full-width half maxima of the Gaussian filters
+    <dataset_folder>: location where the Openfmri dataset is downloaded
+    <subject specific mask image>: ROI mask image of the particular participant 
 
 
 ### All the following commands need to be run from '/home/data/exppsy/spark/Study_Forrest/analysis' location
