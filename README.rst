@@ -1,6 +1,9 @@
 Code: Spatial band-pass filtering aids decoding musical genres from auditory cortex 7T fMRI
 ===========================================================================================
 
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1158836.svg
+   :target: https://doi.org/10.5281/zenodo.1158836
+
 This code repository complements the publication:
 
   Ayan Sengupta, Stefan Pollmann & Michael Hanke (2018). Spatial band-pass filtering aids
